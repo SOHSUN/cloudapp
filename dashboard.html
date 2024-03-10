@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Dashboard</h1>
+        <button onclick="logout()">Logout</button>
+    </header>
+    <div class="container">
+        <h2>Your Files</h2>
+        <div class="file-table">
+            <!-- Changed the headings for better alignment -->
+            <div class="file-row">
+                <div class="file-cell">Filename</div> <!-- Changed from "Type" to "Filename" -->
+                <div class="file-cell">Created Time</div>
+                <div class="file-cell">Modified Time</div>
+                <div class="file-cell">Actions</div>
+            </div>
+            {% for file in files %}
+            <div class="file-row">
+                <!-- Displaying the filename instead of file type -->
+                <div class="file-cell">{{ file.filename }}</div> <!-- Changed from "{{ file.file_type }}" to "{{ file.filename }}" -->
+                <div class="file-cell">{{ file.created_time }}</div>
+                <div class="file-cell">{{ file.modified_time }}</div>
+                <div class="file-cell">
+                    <button onclick="updateFile('{{ file.filename }}')">Update</button>
+                    <button onclick="deleteFile('{{ file.filename }}')">Delete</button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <script src="/static/main.js"></script>
+</body>
+</html>
